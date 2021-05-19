@@ -19,32 +19,32 @@ roman_numeral_map = (('M', 1000),
                      ('IV', 4),
                      ('I', 1))
 
-def latin_to_roman(latin:int, varbose = False) -> str:
+def arabic_to_roman(arabic:int, varbose = False) -> str:
     '''convert integer to Roman numeral'''
-    if not isinstance(latin, int):
-        raise NotIntegerError('non-integers cannot be converted by latin_to_roman')
-    if not (0 < latin < 4000):
-        raise OutOfRangeError('{latin} is out of range input in latin_to_roman (valid input is 0-4000)')
+    if not isinstance(arabic, int):
+        raise NotIntegerError('non-integers cannot be converted by arabic_to_roman')
+    if not (0 < arabic < 4000):
+        raise OutOfRangeError('{arabic} is out of range input in arabic_to_roman (valid input is 0-4000)')
     result = ''
     for numeral, integer in roman_numeral_map:
-        while n >= integer:
+        while arabic >= integer:
             result += numeral
-            n -= integer
+            arabic -= integer
             #print('substracting {0} from input, adding {1} to output'.format(integer, numeral))  
     #print(result)
     return result
 
     
-def roman_to_latin(roman:str, varbose = False) -> int:
+def roman_to_arabic(roman:str, varbose = False) -> int:
     '''convert Roman numeral to integer'''
 
     roman_numeral_pattern = "^M?M?M?(CM|CD|D?C?C?C?)(XC|XL|L?X?X?X?)(IX|IV|V?I?I?I?)$"
 
     if not isinstance(roman, str):
-        raise InvalidRomanFormatError(f'non-strings cannot be converted by roman_to_latin')
+        raise InvalidRomanFormatError(f'non-strings cannot be converted by roman_to_arabic')
     
     if not re.search(roman_numeral_pattern, roman) or roman == "":
-        raise InvalidRomanNumeralError(f'"{roman}" is invalid Roman numeral in roman_to_latin (try MCMLXXIV)')
+        raise InvalidRomanNumeralError(f'"{roman}" is invalid Roman numeral in roman_to_arabic (try MCMLXXIV)')
     
     result = 0
     index = 0

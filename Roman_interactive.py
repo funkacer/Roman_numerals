@@ -1,7 +1,7 @@
 import re
 import sys
 
-from src.roman_numerals import roman_to_latin, latin_to_roman
+from src.roman_numerals import roman_to_arabic, arabic_to_roman
 from src.check_input import check_input
 
 def main(argv):
@@ -9,31 +9,31 @@ def main(argv):
 
     #parse argv
 
-    latin, roman = None, None
+    arabic, roman = None, None
     
     number = input('Please enter number:\n')
 
     try:
-        latin = int(number)
+        arabic = int(number)
     except Exception as e:
         roman = number.strip().upper()
 
     print()
-    print(f'Latin: {latin}, Roman: {roman}')
+    print(f'Arabic: {arabic}, Roman: {roman}')
 
-    if latin is not None:
+    if arabic is not None:
         try:
-            roman = latin_to_roman(latin)
+            roman = arabic_to_roman(arabic)
             print()
-            print(f"Latin {latin} is Roman numeral: {roman}\n")
+            print(f"arabic {arabic} is Roman numeral: {roman}\n")
         except Exception as e:
             print(e, e.__class__.__name__)
 
     if roman is not None:
         try:
-            latin = roman_to_latin(roman)
+            arabic = roman_to_arabic(roman)
             print()
-            print(f"Roman {roman} is Latin numeral: {latin}\n")
+            print(f"Roman {roman} is arabic numeral: {arabic}\n")
         except Exception as e:
             print(e, e.__class__.__name__)
             
@@ -49,24 +49,24 @@ def main(argv):
 
     while answer == 'yes':
 
-        # pass roman/latin number
+        # pass roman/arabic number
 
-        latin, roman = None, None
+        arabic, roman = None, None
         
         number = input('Please enter number:\n')
 
         try:
-            latin = int(number)
+            arabic = int(number)
         except Exception as e:
             roman = number.strip().upper()
 
-        #print(latin, roman)
+        #print(arabic, roman)
 
         if roman is not None:
             try:
-                latin = roman_to_latin(roman)
+                arabic = roman_to_arabic(roman)
                 print()
-                print(f"Roman {roman} is latin: {latin}\n")
+                print(f"Roman {roman} is arabic: {arabic}\n")
             except Exception as e:
                 print(e)
 
