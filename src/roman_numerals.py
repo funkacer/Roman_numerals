@@ -1,4 +1,3 @@
-
 import re
 
 def roman_to_latin(roman:str, verbose = False) -> int:
@@ -27,4 +26,3 @@ def roman_to_latin(roman:str, verbose = False) -> int:
             #print (length-i-1,a[length-i-1:length-i+1],d,x)
 
     return latin
-
