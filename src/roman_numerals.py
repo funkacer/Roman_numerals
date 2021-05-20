@@ -26,7 +26,7 @@ def arabic_to_roman(arabic:int, varbose = False) -> str:
     if not isinstance(arabic, int):
         raise NotIntegerError('non-integers cannot be converted by arabic_to_roman')
     if not (0 < arabic < 4000):
-        raise OutOfRangeError('{arabic} is out of range input in arabic_to_roman (valid input is 0-4000)')
+        raise OutOfRangeError(f'{arabic} is out of range input in arabic_to_roman (valid input is 0-4000)')
     result = ''
     for numeral, integer in roman_numeral_map:
         while arabic >= integer:
