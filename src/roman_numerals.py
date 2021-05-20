@@ -1,3 +1,5 @@
+# This solution is from Mark Pilgrim - Python 3 book
+
 import re
 
 class OutOfRangeError(ValueError): pass
