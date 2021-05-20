@@ -7,9 +7,6 @@ from src.check_input import check_input
 
 
 def main(argv):
-    #print(argv)
-
-    #parse argv
 
     parser = argparse.ArgumentParser()
     parser.add_argument('numbers', metavar='Roman/Arabic', type=str, nargs='*',
@@ -25,32 +22,19 @@ def main(argv):
     feature_parser.add_argument('--interactive', dest='interactive', action='store_true')
     feature_parser.add_argument('--no-interactive', dest='interactive', action='store_false')
     parser.set_defaults(interactive=False)
-
-
-    '''
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-u', '--user')
-    parser.add_argument('-c', '--color')
+    
     namespace = parser.parse_args()
-    command_line_args = {k: v for k, v in vars(namespace).items() if v is not None}
-
-    combined = ChainMap(command_line_args, os.environ, defaults)
-    print(combined['color'])
-    print(combined['user'])
-
     '''
-
-    namespace = parser.parse_args()
     for k,v in vars(namespace).items():
         print(k, v)
-    
+    '''
 
     arabic, roman = None, None
     
     #number = input('Please enter number:\n')
 
     for number in vars(namespace)['numbers']:
-        print(number)
+        #print(number)
     
         try:
             arabic = int(number)
@@ -123,7 +107,7 @@ def main(argv):
 
         if len(vars(namespace)['numbers']) == 0:
             parser.print_help()
-        input("I am done.")
+        input("\nI am done (press Enter to quit).")
 
 if __name__ == '__main__':
     main(sys.argv[1:])
