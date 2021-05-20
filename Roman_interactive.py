@@ -1,13 +1,49 @@
 import re
 import sys
+import argparse
 
 from src.roman_numerals import roman_to_arabic, arabic_to_roman
 from src.check_input import check_input
+
 
 def main(argv):
     #print(argv)
 
     #parse argv
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('inputs', metavar='Roman/Arabic', type=str, nargs='*',
+                    help='an integer for the accumulator')
+    parser.set_defaults(inputs="")
+
+    feature_parser = parser.add_mutually_exclusive_group(required=False)
+    feature_parser.add_argument('--verbose', dest='verbose', action='store_true')
+    feature_parser.add_argument('--no-verbose', dest='verbose', action='store_false')
+    parser.set_defaults(verbose=False)
+
+    feature_parser = parser.add_mutually_exclusive_group(required=False)
+    feature_parser.add_argument('--interactive', dest='interactive', action='store_true')
+    feature_parser.add_argument('--no-interactive', dest='interactive', action='store_false')
+    parser.set_defaults(interactive=True)
+
+
+    '''
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-u', '--user')
+    parser.add_argument('-c', '--color')
+    namespace = parser.parse_args()
+    command_line_args = {k: v for k, v in vars(namespace).items() if v is not None}
+
+    combined = ChainMap(command_line_args, os.environ, defaults)
+    print(combined['color'])
+    print(combined['user'])
+
+    '''
+
+    namespace = parser.parse_args()
+    for k,v in vars(namespace).items():
+        print(k, v)
+    
 
     arabic, roman = None, None
     
