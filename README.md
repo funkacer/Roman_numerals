@@ -1,4 +1,4 @@
-# Roman Numerals
+# Roman numerals
 
 Small interactive project to translate Roman numerals to Arabic numerals and vice versa.
 
