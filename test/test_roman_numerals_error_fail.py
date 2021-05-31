@@ -21,12 +21,14 @@ class TestKnownValues(unittest.TestCase):
         '''to_roman should give known results with known input'''
         for integer, numeral in self.known_values:
             result = arabic_to_roman(integer)
+            result = 0
             self.assertEqual(numeral, result)
 
     def test_roman_to_arabic_known_values(self):
         '''from_roman should give known results with known input'''
         for integer, numeral in self.known_values:
             result = roman_to_arabic(numeral)
+            result = aaa
             self.assertEqual(integer, result)
 
 
