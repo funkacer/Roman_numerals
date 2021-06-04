@@ -1,4 +1,3 @@
-import re
 import sys
 import argparse
 
@@ -22,7 +21,7 @@ def main(argv):
     feature_parser.add_argument('--interactive', dest='interactive', action='store_true')
     feature_parser.add_argument('--no-interactive', dest='interactive', action='store_false')
     parser.set_defaults(interactive=False)
-    
+
     namespace = parser.parse_args()
     '''
     for k,v in vars(namespace).items():
@@ -30,39 +29,38 @@ def main(argv):
     '''
 
     arabic, roman = None, None
-    
-    #number = input('Please enter number:\n')
+
+    if len(vars(namespace)['numbers']) == 0 and not vars(namespace)['interactive']:
+        parser.print_help()
+        print()
+    else:
+        print()
 
     for number in vars(namespace)['numbers']:
         #print(number)
-    
+
         try:
             arabic = int(number)
         except Exception as e:
             roman = number.strip().upper()
 
-        print()
-        #print(f'Arabic: {arabic}, Roman: {roman}')
-
         if arabic is not None:
             try:
-                roman = arabic_to_roman(arabic)
-                print()
-                print(f"arabic {arabic} is Roman numeral: {roman}\n")
+                result = arabic_to_roman(arabic)
+                print(f"arabic {arabic} is Roman numeral: {result}\n")
             except Exception as e:
                 print(e, e.__class__.__name__)
 
         elif roman is not None:
             try:
-                arabic = roman_to_arabic(roman)
-                print()
-                print(f"Roman {roman} is arabic numeral: {arabic}\n")
+                result = roman_to_arabic(roman)
+                print(f"Roman {roman} is arabic numeral: {result}\n")
             except Exception as e:
                 print(e, e.__class__.__name__)
 
 
-    if vars(namespace)['interactive']:        
-    
+    if vars(namespace)['interactive'] or len(vars(namespace)['numbers']) == 0:
+
         print("Entering interactive mode.\n")
 
         answer = 'yes'
@@ -72,7 +70,7 @@ def main(argv):
             # pass roman/arabic number
 
             arabic, roman = None, None
-            
+
             number = input('Please enter number:\n')
 
             try:
@@ -80,12 +78,9 @@ def main(argv):
             except Exception as e:
                 roman = number.strip().upper()
 
-            #print(arabic, roman)
-
             if arabic is not None:
                 try:
                     roman = arabic_to_roman(arabic)
-                    print()
                     print(f"arabic {arabic} is Roman numeral: {roman}\n")
                 except Exception as e:
                     print(e, e.__class__.__name__)
@@ -93,7 +88,6 @@ def main(argv):
             elif roman is not None:
                 try:
                     arabic = roman_to_arabic(roman)
-                    print()
                     print(f"Roman {roman} is arabic numeral: {arabic}\n")
                 except Exception as e:
                     print(e, e.__class__.__name__)
@@ -103,11 +97,11 @@ def main(argv):
                 answer = input("Do you want to continue? (yes, no):\n").lower()
                 answer = check_input(answer, ['yes','no'])
 
+        input("I am done (press Enter to quit).")
+
     else:
 
-        if len(vars(namespace)['numbers']) == 0:
-            parser.print_help()
-        input("\nI am done (press Enter to quit).")
+        input("I am done (press Enter to quit).")
 
 if __name__ == '__main__':
     main(sys.argv[1:])
