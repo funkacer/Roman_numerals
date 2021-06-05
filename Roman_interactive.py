@@ -20,7 +20,7 @@ def main(argv):
     feature_parser = parser.add_mutually_exclusive_group(required=False)
     feature_parser.add_argument('--interactive', dest='interactive', action='store_true')
     feature_parser.add_argument('--no-interactive', dest='interactive', action='store_false')
-    parser.set_defaults(interactive=False)
+    parser.set_defaults(interactive='')
 
     namespace = parser.parse_args()
     '''
@@ -30,7 +30,7 @@ def main(argv):
 
     arabic, roman = None, None
 
-    if len(vars(namespace)['numbers']) == 0 and not vars(namespace)['interactive']:
+    if len(vars(namespace)['numbers']) == 0 and isinstance(vars(namespace)['interactive'], str):
         parser.print_help()
         print()
     else:
@@ -58,20 +58,26 @@ def main(argv):
             except Exception as e:
                 print(e, e.__class__.__name__)
 
+    #print(vars(namespace)['interactive'].__class__)
+    if vars(namespace)['interactive'] or len(vars(namespace)['numbers']) == 0 and isinstance(vars(namespace)['interactive'], str):
 
-    if vars(namespace)['interactive'] or len(vars(namespace)['numbers']) == 0:
+        print("Entering interactive mode. Type q to quit.\n")
 
-        print("Entering interactive mode.\n")
-
-        answer = 'yes'
-
-        while answer == 'yes':
+        while True:
 
             # pass roman/arabic number
 
             arabic, roman = None, None
 
-            number = input('Please enter number:\n')
+            answer = input('Please enter number:\n')
+
+            if answer != '':
+                answer_check = check_input(answer.lower(), ['quit'], False)
+                if answer_check == 'quit':
+                    print('OK, you have chosen to quit. Bye!')
+                    break
+
+            number = answer
 
             try:
                 arabic = int(number)
@@ -92,16 +98,6 @@ def main(argv):
                 except Exception as e:
                     print(e, e.__class__.__name__)
 
-            answer = ''
-            while answer not in ['yes','no']:
-                answer = input("Do you want to continue? (yes, no):\n").lower()
-                answer = check_input(answer, ['yes','no'])
-
-        input("I am done (press Enter to quit).")
-
-    else:
-
-        input("I am done (press Enter to quit).")
 
 if __name__ == '__main__':
     main(sys.argv[1:])
