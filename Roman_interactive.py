@@ -28,8 +28,6 @@ def main(argv):
         print(k, v)
     '''
 
-    arabic, roman = None, None
-
     if len(vars(namespace)['numbers']) == 0 and isinstance(vars(namespace)['interactive'], str):
         parser.print_help()
         print()
@@ -37,7 +35,8 @@ def main(argv):
         print()
 
     for number in vars(namespace)['numbers']:
-        #print(number)
+        
+        arabic, roman = None, None
 
         try:
             arabic = int(number)
