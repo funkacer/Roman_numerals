@@ -46,7 +46,7 @@ def main(argv):
         if arabic is not None:
             try:
                 result = arabic_to_roman(arabic)
-                print(f"arabic {arabic} is Roman numeral: {result}\n")
+                print(f"Arabic {arabic} is Roman numeral: {result}\n")
             except Exception as e:
                 print(e, e.__class__.__name__)
 
@@ -86,7 +86,7 @@ def main(argv):
             if arabic is not None:
                 try:
                     roman = arabic_to_roman(arabic)
-                    print(f"arabic {arabic} is Roman numeral: {roman}\n")
+                    print(f"Arabic {arabic} is Roman numeral: {roman}\n")
                 except Exception as e:
                     print(e, e.__class__.__name__)
 
