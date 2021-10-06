@@ -35,7 +35,7 @@ def main(argv):
         print()
 
     for number in vars(namespace)['numbers']:
-        
+
         arabic, roman = None, None
 
         try:
@@ -46,16 +46,18 @@ def main(argv):
         if arabic is not None:
             try:
                 result = arabic_to_roman(arabic)
-                print(f"Arabic {arabic} is Roman numeral: {result}\n")
+                print(f"Arabic {arabic} is Roman numeral: {result}")
             except Exception as e:
                 print(e, e.__class__.__name__)
 
         elif roman is not None:
             try:
                 result = roman_to_arabic(roman)
-                print(f"Roman {roman} is arabic numeral: {result}\n")
+                print(f"Roman {roman} is Arabic numeral: {result}")
             except Exception as e:
                 print(e, e.__class__.__name__)
+
+        print()
 
     #print(vars(namespace)['interactive'].__class__)
     if vars(namespace)['interactive'] or len(vars(namespace)['numbers']) == 0 and isinstance(vars(namespace)['interactive'], str):
@@ -73,7 +75,7 @@ def main(argv):
             if answer != '':
                 answer_check = check_input(answer.lower(), ['quit'], False)
                 if answer_check == 'quit':
-                    print('OK, you have chosen to quit. Bye!')
+                    print('\nOK, you have chosen to quit. Bye!\n')
                     break
 
             number = answer
@@ -86,17 +88,18 @@ def main(argv):
             if arabic is not None:
                 try:
                     roman = arabic_to_roman(arabic)
-                    print(f"Arabic {arabic} is Roman numeral: {roman}\n")
+                    print(f"Arabic {arabic} is Roman numeral: {roman}")
                 except Exception as e:
                     print(e, e.__class__.__name__)
 
             elif roman is not None:
                 try:
                     arabic = roman_to_arabic(roman)
-                    print(f"Roman {roman} is arabic numeral: {arabic}\n")
+                    print(f"Roman {roman} is Arabic numeral: {arabic}")
                 except Exception as e:
                     print(e, e.__class__.__name__)
 
+            print()
 
 if __name__ == '__main__':
     main(sys.argv[1:])
