@@ -10,13 +10,13 @@ sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 from src.roman_numerals import roman_to_arabic, arabic_to_roman
 
 class TestKnownValues(unittest.TestCase):
-        
-    with open (os.path.join(SCRIPT_DIR,'test_cases.tst'), 'r') as f:
+
+    with open (os.path.join(SCRIPT_DIR,'test_cases.txtx'), 'r') as f:
         lines = f.read().split()
     known_values = []
     for line in lines[1:]:  # first line are column names
         known_values.append((int(line.split(';')[0]), line.split(';')[1]))
-        
+
     def test_arabic_to_roman_known_values(self):
         '''to_roman should give known results with known input'''
         for integer, numeral in self.known_values:
@@ -69,7 +69,7 @@ try:
         o = file.read()
 except Exception as e:
     o = ''
-    
+
 with open (os.path.join(SCRIPT_DIR,'test_roman_numerals_results.txt'), 'w') as file:
         file.write(a+'\n')
         file.write(o)
