@@ -86,7 +86,7 @@ def main(argv):
             answer = input('Please enter number (q to quit):\n')
 
             if answer != '':
-                answer_check = check_input(answer.strip().lower(), ['quit'], False)
+                answer_check = check_input(answer.strip().lower(), ['quit'], False, False)
                 if answer_check == 'quit':
                     print('\nOK, you have chosen to quit. Bye!\n')
                     break

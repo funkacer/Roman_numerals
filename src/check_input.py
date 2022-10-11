@@ -1,10 +1,12 @@
-def check_input(inp, lst, verb = True):
+def check_input(inp, lst, cs = True, verb = True):
     '''
     Check if input is in the list of options.
 
     Args:
         (str) inp - user input to check
         (list) lst - list of options to choose from
+        (bool) cs - func is case sensitive
+        (bool) verb - func is verbose
     Returns:
         (str) out - selected option from list or None
     '''
@@ -19,11 +21,14 @@ def check_input(inp, lst, verb = True):
 
     found_options = []
     out = None
+    if not cs: inp = inp.lower()
 
     for inp_check in lst:
+        inp_check_append = inp_check    # append original option in case func is not sensitive
+        if not cs: inp_check = inp_check.lower()
         #print(inp_check)
         if inp_check.startswith(inp):
-            found_options.append(inp_check)
+            found_options.append(inp_check_append)
     if len(found_options) == 0:
         if verb: print("Your answer does not fit to any option. Please select one of these: {}.".format(", ".join("'" + o + "'" for o in lst)))
     elif len(found_options) == 1:

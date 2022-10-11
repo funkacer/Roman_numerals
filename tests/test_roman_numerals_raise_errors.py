@@ -8,32 +8,30 @@ SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.
 sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 
 from src.roman_numerals import roman_to_arabic, arabic_to_roman
+from src.roman_numerals import OutOfRangeError, NotIntegerError, InvalidRomanNumeralError, InvalidRomanFormatError
 
-class TestKnownValues(unittest.TestCase):
+class TestRaiseError(unittest.TestCase):
 
-    with open (os.path.join(SCRIPT_DIR,'test_cases.txtx'), 'r') as f:
-        lines = f.read().split()
-    known_values = []
-    for line in lines[1:]:  # first line are column names
-        known_values.append((int(line.split(';')[0]), line.split(';')[1]))
+    def test_arabic_to_roman_raise_errors(self):
+        '''arabic_to_roman should raise error with invalid input'''
+        inputs = [1.1, -1.1, "", "A"]
+        for input in inputs:
+            self.assertRaises(NotIntegerError, arabic_to_roman, input)
+        inputs = [0, 4000, -1]
+        for input in inputs:
+            self.assertRaises(OutOfRangeError, arabic_to_roman, input)
 
-    def test_arabic_to_roman_known_values(self):
-        '''to_roman should give known results with known input'''
-        for integer, numeral in self.known_values:
-            result = arabic_to_roman(integer)
-            result = 0
-            self.assertEqual(numeral, result)
-
-    def test_roman_to_arabic_known_values(self):
-        '''from_roman should give known results with known input'''
-        for integer, numeral in self.known_values:
-            result = roman_to_arabic(numeral)
-            result = aaa
-            self.assertEqual(integer, result)
-
+    def test_roman_to_arabic_raise_errors(self):
+        '''roman_to_arabic should raise error with invalid input'''
+        inputs = [0, 4000, -1, 1.1]
+        for input in inputs:
+            self.assertRaises(InvalidRomanFormatError, roman_to_arabic, input)
+        inputs = ["", "A", "MMMM", "MCMC"]
+        for input in inputs:
+            self.assertRaises(InvalidRomanNumeralError, roman_to_arabic, input)
 
 runner = unittest.TextTestRunner()
-suite = unittest.TestLoader().loadTestsFromTestCase(TestKnownValues)
+suite = unittest.TestLoader().loadTestsFromTestCase(TestRaiseError)
 result = runner.run(suite)
 
 a = str(datetime.datetime.now()) + '\n'
