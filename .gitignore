@@ -7,6 +7,7 @@
 /__pycache__/
 /.pytest_cache/
 /.ipynb_checkpoints/
-**/old/*/
-**/src/*/
-**/test/*/
+/tests/.pytest_cache/
+/tests/__pycache__/
+/src/.pytest_cache/
+/src/__pycache__/
