@@ -79,37 +79,41 @@ def main(argv):
 
         print("Entering interactive mode.\n")
 
-        while True:
+        finish = 0
+
+        while not finish:
 
             # pass roman/arabic number, or any start of "quit" string to quit
 
-            answer = input('Please enter number (q to quit):\n')
-
-            if answer != '':
-                answer_check = check_input(answer.strip().lower(), ['quit'], False, False)
-                if answer_check == 'quit':
-                    print('\nOK, you have chosen to quit. Bye!\n')
-                    break
-
-            number = answer # answer is not to "quit", so it is a number to use
-
-            arabic, roman = get_arabic_roman(number)
-
-            if arabic is not None:
-                try:
-                    roman = arabic_to_roman(arabic, vars(namespace)['verbose'])
-                    print(f"Arabic {arabic} is Roman numeral: {roman}")
-                except Exception as e:
-                    print(e, e.__class__.__name__)
-
-            elif roman is not None:
-                try:
-                    arabic = roman_to_arabic(roman, vars(namespace)['verbose'])
-                    print(f"Roman {roman} is Arabic numeral: {arabic}")
-                except Exception as e:
-                    print(e, e.__class__.__name__)
-
+            answers = input('Please enter number (q to quit):\n').replace(",", " ").split()
             print()
+
+            for number in answers:
+
+                if number != '':
+                    answer_check = check_input(number.strip().lower(), ['quit'], False, False)
+                    if answer_check == 'quit':
+                        print('OK, you have chosen to quit. Bye!\n')
+                        finish = 1
+                        break
+
+                arabic, roman = get_arabic_roman(number)
+
+                if arabic is not None:
+                    try:
+                        roman = arabic_to_roman(arabic, vars(namespace)['verbose'])
+                        print(f"Arabic {arabic} is Roman numeral: {roman}")
+                    except Exception as e:
+                        print(e, e.__class__.__name__)
+
+                elif roman is not None:
+                    try:
+                        arabic = roman_to_arabic(roman, vars(namespace)['verbose'])
+                        print(f"Roman {roman} is Arabic numeral: {arabic}")
+                    except Exception as e:
+                        print(e, e.__class__.__name__)
+
+                print()
 
 if __name__ == '__main__':
     main(sys.argv[1:])
