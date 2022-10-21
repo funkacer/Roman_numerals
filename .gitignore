@@ -4,10 +4,10 @@
 *.json
 *.xlsx
 *.lnk
+*.dat
 /__pycache__/
+*/__pycache__/
 /.pytest_cache/
+*/.pytest_cache/
 /.ipynb_checkpoints/
-/tests/.pytest_cache/
-/tests/__pycache__/
-/src/.pytest_cache/
-/src/__pycache__/
+*/.ipynb_checkpoints/
